@@ -33,6 +33,7 @@ public class Stanza implements Comparable<Stanza> {
         this.nome = nome;
         this.stanzeAdiacenti = new HashMap<>();
         this.attrezzi = new HashMap<>();
+        this.personaggio = null;
     }
 
     /**

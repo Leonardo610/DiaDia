@@ -22,8 +22,8 @@ public class AttrezzoTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testAttrezzoPesoNegativo() {
+		@SuppressWarnings("unused")
 		Attrezzo attrezzo3 = new Attrezzo("Matita", -2);
-		assertEquals("Matita (-2 kg)", attrezzo3.toString());
 	}
 	
 

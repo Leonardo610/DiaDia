@@ -1,4 +1,4 @@
-package it.uniroma3.diadia.comando;
+package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
@@ -13,20 +13,20 @@ import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPosa extends AbstractComando {
 	
-	public void esegui(Partita partita) {
+	public String esegui(Partita partita) {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Borsa borsaGiocatore = partita.getGiocatore().getBorsa();
 		Attrezzo attrezzoDaPosare = null;
 		if (super.getParametro()==null)
-			System.out.println("Cosa vuoi posare?");
+			return "Cosa vuoi posare?";
 		else {
 			attrezzoDaPosare = borsaGiocatore.getAttrezzo(super.getParametro());
 			if (attrezzoDaPosare == null)
-				System.out.println("Attrezzo non presente nella borsa del giocatore!");
+				return "Attrezzo non presente nella borsa del giocatore!";
 			else {
 				borsaGiocatore.removeAttrezzo(super.getParametro());
 				stanzaCorrente.addAttrezzo(attrezzoDaPosare);
-				System.out.println("Attrezzo posato!");
+				return "Attrezzo posato!";
 			}
 		}
 	}

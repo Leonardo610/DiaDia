@@ -1,4 +1,4 @@
-package it.uniroma3.diadia.comando;
+package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 
@@ -10,7 +10,7 @@ import it.uniroma3.diadia.Partita;
 
 public class ComandoFine extends AbstractComando {
 	
-	public void esegui(Partita partita) {
-		System.out.println("Grazie di aver giocato!");  // si desidera smettere
+	public String esegui(Partita partita) {
+		return "Grazie di aver giocato!";  // si desidera smettere
 	}
 }

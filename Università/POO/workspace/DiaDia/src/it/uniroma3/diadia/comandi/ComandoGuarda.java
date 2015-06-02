@@ -1,4 +1,4 @@
-package it.uniroma3.diadia.comando;
+package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
@@ -12,10 +12,10 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class ComandoGuarda extends AbstractComando {
 	
-	public void esegui(Partita partita) {
+	public String esegui(Partita partita) {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Giocatore giocatore = partita.getGiocatore();
-		System.out.println(stanzaCorrente.getDescrizione() + "\n" + giocatore.toString());
+		return stanzaCorrente.getDescrizione() + "\n" + giocatore.toString();
 	}
 
 }

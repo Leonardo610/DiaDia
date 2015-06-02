@@ -1,9 +1,8 @@
 package it.uniroma3.diadia;
 
-import it.uniroma3.diadia.comando.AbstractComando;
-import it.uniroma3.diadia.comando.FabbricaDiComandiSemplice;
-
-import java.util.Scanner;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.comandi.AbstractComando;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 
 /**
  *  Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -16,34 +15,36 @@ import java.util.Scanner;
  */
 
 public class DiaDia {
+	private InterfacciaUtente console;
 	private Partita partita;
-    private static final String MESSAGGIO_BENVENUTO = 
-		"Ti trovi nell'Universita', ma oggi e' diversa dal solito...\n" +
-		"Meglio andare al piu' presto in biblioteca a studiare. Ma dov'e'?\n"+
-		"I locali sono popolati da strani personaggi, " +
-		"alcuni amici, altri... chissa!\n"+
-		"Ci sono attrezzi che potrebbero servirti nell'impresa:\n"+
-		"puoi raccoglierli, usarli, posarli quando ti sembrano inutili\n" +
-		"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
-		"Per conoscere le istruzioni usa il comando 'aiuto'.";
-
-    public DiaDia() {
-    	this.partita = new Partita();
-    }
-
-	public void gioca() {
-		String istruzione; 
-	    Scanner scannerDiLinee;
-
-		System.out.println(MESSAGGIO_BENVENUTO);
-	    scannerDiLinee = new Scanner(System.in);		
-		do		
-			istruzione = scannerDiLinee.nextLine();
-		while (!processaIstruzione(istruzione));
-		scannerDiLinee.close();
-	}   
+	private static final String MESSAGGIO_BENVENUTO = 
+			"Ti trovi nell'Universita', ma oggi e' diversa dal solito...\n" +
+			"Meglio andare al piu' presto in biblioteca a studiare. Ma dov'e'?\n"+
+			"I locali sono popolati da strani personaggi, " +
+			"alcuni amici, altri... chissa!\n"+
+			"Ci sono attrezzi che potrebbero servirti nell'impresa:\n"+
+			"puoi raccoglierli, usarli, posarli quando ti sembrano inutili\n" +
+			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
+			"Per conoscere le istruzioni usa il comando 'aiuto'.";
     
-        
+
+    public DiaDia() throws FormatoFileNonValidoException {
+    	this.console = new InterfacciaUtenteConsole();
+    	this.partita = new Partita(new Labirinto("labirinto1.txt"));
+    }
+    
+    
+    /**
+     * Il metodo gioca dà inizio al divertimento.
+     */
+	public void gioca() {
+		String istruzione;
+		this.console.mostraMessaggio(MESSAGGIO_BENVENUTO);	
+		do		
+			istruzione = this.console.prendiIstruzione();
+		while (!processaIstruzione(istruzione));
+	} 
+       
 	/**
 	 * Processa una istruzione 
 	 *
@@ -51,19 +52,19 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) { 
 		AbstractComando comandoDaEseguire; 
-		FabbricaDiComandiSemplice factory = new FabbricaDiComandiSemplice(); 
+		FabbricaDiComandiRiflessiva factory = new FabbricaDiComandiRiflessiva(); 
 		comandoDaEseguire = factory.costruisciComando(istruzione); 
 		if (comandoDaEseguire!=null)
-			comandoDaEseguire.esegui(this.partita); 
+			this.console.mostraMessaggio(comandoDaEseguire.esegui(this.partita)); 
 		if (this.partita.vinta()) 
-				System.out.println("Hai vinto!"); 
+				this.console.mostraMessaggio("Hai vinto!"); 
 		if (!this.partita.giocatoreIsVivo()) 
-				System.out.println("GAME OVER! CFU esauriti!"); 
+				this.console.mostraMessaggio("GAME OVER! CFU esauriti!"); 
 		return this.partita.isFinita(); 
 
 	}
 	
-	public static void main(String[] argc) {
+	public static void main(String[] argc) throws FormatoFileNonValidoException {
 		DiaDia gioco = new DiaDia();
 		gioco.gioca();
 	}

@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.comando.AbstractComando;
-import it.uniroma3.diadia.comando.ComandoPosa;
+import it.uniroma3.diadia.comandi.AbstractComando;
+import it.uniroma3.diadia.comandi.ComandoPosa;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 import org.junit.Before;

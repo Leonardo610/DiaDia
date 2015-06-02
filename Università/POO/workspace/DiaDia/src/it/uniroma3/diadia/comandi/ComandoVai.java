@@ -1,4 +1,4 @@
-package it.uniroma3.diadia.comando;
+package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.*;
@@ -13,25 +13,21 @@ import it.uniroma3.diadia.ambienti.*;
 public class ComandoVai extends AbstractComando {
 
 
-	public void esegui(Partita partita) {
+	public String esegui(Partita partita) {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Stanza prossimaStanza = null; 
-		if (super.getParametro()==null) {
-			System.out.println("Dove vuoi andare? Devi specificare una direzione"); 
-			return; 
-		} 
+		if (super.getParametro()==null) 
+			return ("Dove vuoi andare? Devi specificare una direzione");  
 		prossimaStanza = stanzaCorrente.getStanzaAdiacente(super.getParametro());
 		if (prossimaStanza==null) {
-			System.out.println("Direzione inesistente"); 
-			return; 
+			return "Direzione inesistente";
 		}
 		if (prossimaStanza==partita.getStanzaCorrente()) {
-			System.out.println(prossimaStanza.getNome());
-			return;
+			return prossimaStanza.getNome();
 		}
 		partita.setStanzaCorrente(prossimaStanza);
-		System.out.println(partita.getStanzaCorrente().getNome());
 		partita.getGiocatore().consumaCfu();
+		return partita.getStanzaCorrente().getNome();
 	}
 
 }

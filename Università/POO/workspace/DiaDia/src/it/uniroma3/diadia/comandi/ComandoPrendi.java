@@ -1,4 +1,4 @@
-package it.uniroma3.diadia.comando;
+package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
@@ -14,24 +14,24 @@ import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPrendi extends AbstractComando {
 
-	public void esegui(Partita partita) {
+	public String esegui(Partita partita) {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Borsa borsaGiocatore = partita.getGiocatore().getBorsa();
 		Attrezzo attrezzoDaPrendere = null;
 		if (super.getParametro() == null)
-			System.out.println("Cosa vuoi prendere?");
+			return "Cosa vuoi prendere?";
 		else {
 			attrezzoDaPrendere = stanzaCorrente.getAttrezzo(super.getParametro());
 			if (attrezzoDaPrendere == null)
-				System.out.println("Attrezzo non presente nella stanza!");
+				return "Attrezzo non presente nella stanza!";
 			else {
 				boolean preso = borsaGiocatore.addAttrezzo(attrezzoDaPrendere);
 				if (preso) {
 					stanzaCorrente.removeAttrezzo(super.getParametro());
-					System.out.println("Attrezzo preso!");
+					return "Attrezzo preso!";
 				}
 				else
-					System.out.println("Attrezzo non preso, capienza massima borsa raggiunta!");
+					return "Attrezzo non preso, capienza massima borsa raggiunta!";
 			}
 		}
 	}

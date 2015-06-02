@@ -1,19 +1,22 @@
 package it.uniroma3.diadia.personaggi;
 
-import java.util.Collections;
-
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
+
+import java.util.Collections;
 
 public class Strega extends AbstractPersonaggio {
 	private static final String MESSAGGIO_RISENTITO = "Ma come ti permetti? Sparisci da qui!" + 
 													  "\nLa strega ti ha teletrasportato nella stanza adiacente con meno attrezzi.";
 	private static final String MESSAGGIO_BUONO = "Sei molto educato, e percio' ti ricompenserò!" + 
 												  "\nLa strega ti ha teletrasportato nella stanza adiacente con piu' attrezzi.";
+	private static final String MESSAGGIO_PRESAINGIRO = "AHAHAHAHAHAH";
 	
 	public Strega(String nome, String presentazione) {
 		super(nome, presentazione);
 	}
 	
+	@Override
 	public String agisci(Partita partita) {
 		String msg = null;
 		if (!super.haSalutato()) {
@@ -34,5 +37,10 @@ public class Strega extends AbstractPersonaggio {
 			}
 		}
 		return msg;
+	}
+	
+	@Override
+	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		 return MESSAGGIO_PRESAINGIRO + "\nLa strega si e' tenuta il tuo regalo.";
 	}
 }

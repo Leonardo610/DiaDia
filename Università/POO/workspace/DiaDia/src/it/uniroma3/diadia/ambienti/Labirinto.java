@@ -1,5 +1,10 @@
 package it.uniroma3.diadia.ambienti;
 
+
+import java.io.IOException;
+
+import it.uniroma3.diadia.CaricatoreLabirinto;
+import it.uniroma3.diadia.FormatoFileNonValidoException;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.Cane;
 import it.uniroma3.diadia.personaggi.Mago;
@@ -15,9 +20,23 @@ import it.uniroma3.diadia.personaggi.Strega;
 public class Labirinto {
 	private Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
+	private Stanza stanzaIniziale;
 	
 	public Labirinto() {
-		creaStanze();
+		this.creaStanze();
+	}
+	
+	public Labirinto(String nomeFile) throws FormatoFileNonValidoException {
+		try {
+			CaricatoreLabirinto c = new CaricatoreLabirinto(nomeFile);
+			c.carica();
+			this.stanzaIniziale = c.getStanzaIniziale();
+			this.stanzaCorrente = c.getStanzaIniziale();
+			this.stanzaVincente = c.getStanzaVincente();
+		}
+		catch (IOException e) {
+			throw new FormatoFileNonValidoException("Formato del file errato.");
+		}
 	}
 	
 	private void creaStanze() {
@@ -88,11 +107,15 @@ public class Labirinto {
     }
 
 	public Stanza getStanzaVincente() {
-		return stanzaVincente;
+		return this.stanzaVincente;
 	}
 
 	public Stanza getStanzaCorrente() {
 		return this.stanzaCorrente;
+	}
+	
+	public Stanza getStanzaIniziale() {
+		return this.stanzaIniziale;
 	}
 
 }

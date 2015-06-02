@@ -1,4 +1,4 @@
-package it.uniroma3.diadia.comando;
+package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 
@@ -10,8 +10,8 @@ import it.uniroma3.diadia.Partita;
 
 public class ComandoNonValido extends AbstractComando {
 	
-	public void esegui(Partita partita) {
-		System.out.println("Comando non valido!");
+	public String esegui(Partita partita) {
+		return "Comando non valido!";
 	}
 
 }
