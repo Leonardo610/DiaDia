@@ -1,0 +1,6 @@
+Stanze: Biblioteca, N10, N11
+Inizio: N10
+Vincente: N11
+Attrezzi: martello 10 Biblioteca, pinza 2 N10
+Uscite: Biblioteca nord N10, Biblioteca sud N11, N10 sud Biblioteca, N11 nord Biblioteca
+Personaggi: Mago Merlino Sono il mago dell'università e ti aiuterò nella tua avventura! Biblioteca

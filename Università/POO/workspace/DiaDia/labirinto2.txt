@@ -1,0 +1,5 @@
+Stanze: biblioteca, N10, N11, CampusOne, DS2
+Inizio: N10
+Vincente: N11
+Attrezzi: spada 3 N10, pala 4 biblioteca, lanterna 3 DS2, pugnale 1 DS2
+Uscite: biblioteca nord N10, biblioteca sud N11, N10 sud biblioteca, N11 nord biblioteca, biblioteca est DS2, DS2 ovest biblioteca, DS2 nord CampusOne, CampusOne sud DS2, CampusOne ovest N10, N10 est CampusOne
