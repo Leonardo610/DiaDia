@@ -10,17 +10,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CaricatoreLabirintoTest {
-	private CaricatoreLabirinto caricatore;
-	private StringReader lettore;
+	private StringReader lettore, lettoreSbagliato;
 	private File fileprova;
 
 	@Before
 	public void setUp() throws Exception {
-		lettore = new StringReader("Stanze: biblioteca, N10, N11 Inizio: N10 Vincente: N11 Attrezzi: martello 10 biblioteca, pinza 2 N10 Uscite: biblioteca nord N10, biblioteca sud N11");	
+		lettore = new StringReader("Stanze: Biblioteca\nInizio: Biblioteca\nVincente: Biblioteca\nAttrezzi: \nUscite:");
 	}
 
-	@Test(expected = FileNotFoundException.class)
-	public void testFileNonTrovato() {
-		caricatore = new CaricatoreLabirinto(lettore);
+	@Test(expected = FormatoFileNonValidoException.class)
+	public void testLettoreSbagliato() {
+		lettoreSbagliato = new StringReader("Sanze: Biblioteca\nInizio: Biblioteca\nVincente: Biblioteca\nAttrezzi: \nUscite:");
+		CaricatoreLabirinto sbagliato = new CaricatoreLabirinto(lettore);
+		CaricatoreLabirinto corretto = new CaricatoreLabirinto(lettoreSbagliato);
+		assertEquals(sbagliato, corretto);
+	}
 		
 }

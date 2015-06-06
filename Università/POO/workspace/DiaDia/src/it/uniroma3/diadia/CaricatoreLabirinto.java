@@ -2,10 +2,17 @@ package it.uniroma3.diadia;
 
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
-import java.io.*;
-import java.util.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.Reader;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public class CaricatoreLabirinto {
 
@@ -24,8 +31,8 @@ public class CaricatoreLabirinto {
 	/* prefisso della riga contenente le specifiche dei collegamenti tra stanza nel formato <nomeStanzaDa> <direzione> <nomeStanzaA> */
 	private static final String USCITE_MARKER = "Uscite: ";
 	
-	/*prefisso della riga contenente la collocazione dei personaggi nelle varie stanze*/
-	private static final String PERSONAGGI_MARKER = "Personaggi: ";
+	/*prefisso della riga contenente la collocazione dei personaggi nelle varie stanze
+	private static final String PERSONAGGI_MARKER = "Personaggi: ";*/
 
 	/*
 	 *  Esempio di un possibile file di specifica di un labirinto (vedi POO-26-eccezioni-file.pdf)
@@ -43,17 +50,9 @@ public class CaricatoreLabirinto {
 
 	private Stanza stanzaIniziale;
 	private Stanza stanzaVincente;
-
-
+	
 	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
-		this.nome2stanza = new HashMap<String,Stanza>();
-		try {
-			this.reader = new LineNumberReader(new FileReader(nomeFile));
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("File non trovato!");
-		}		
+		this(new FileReader(nomeFile));
 	}
 	
 	public CaricatoreLabirinto(Reader lettore) {
@@ -67,7 +66,7 @@ public class CaricatoreLabirinto {
 			this.leggiInizialeEvincente();
 			this.leggiECollocaAttrezzi();
 			this.leggiEImpostaUscite();
-			this.leggiECollocaPersonaggi();
+			//this.leggiECollocaPersonaggi();
 		} finally {
 			try {
 				reader.close();
@@ -137,7 +136,7 @@ public class CaricatoreLabirinto {
 		}
 	}
 	
-	private void leggiECollocaPersonaggi() throws FormatoFileNonValidoException {
+	/*private void leggiECollocaPersonaggi() throws FormatoFileNonValidoException {
 		String leggiPersonaggi = this.leggiRigaCheCominciaPer(PERSONAGGI_MARKER);
 		String tipoPersonaggio = null;
 		String nomeStanza = null;
@@ -167,7 +166,7 @@ public class CaricatoreLabirinto {
 		catch (Exception e) {
 			System.out.println("Personaggio non esistente.");
 		}
-	}
+	}*/
 
 	private void posaAttrezzo(String nomeAttrezzo, String pesoAttrezzo, String nomeStanza) throws FormatoFileNonValidoException {
 		int peso;

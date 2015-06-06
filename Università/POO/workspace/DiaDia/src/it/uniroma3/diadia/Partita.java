@@ -20,7 +20,7 @@ public class Partita {
 	private Giocatore giocatore;
 	private Stanza stanzaCorrente;
 	
-	public Partita() throws FormatoFileNonValidoException {
+	public Partita() {
 		this(new Labirinto());
 	}
 	

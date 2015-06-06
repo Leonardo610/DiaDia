@@ -8,6 +8,8 @@ public abstract class AbstractPersonaggio {
 	private String presentazione;
 	private boolean haSalutato;
 	
+	public AbstractPersonaggio() {}
+	
 	public AbstractPersonaggio(String nome, String presentaz) {
 		this.nome = nome;
 		this.presentazione = presentaz;

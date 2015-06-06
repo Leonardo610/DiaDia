@@ -1,14 +1,14 @@
 package it.uniroma3.diadia.ambienti;
 
 
-import java.io.IOException;
-
 import it.uniroma3.diadia.CaricatoreLabirinto;
 import it.uniroma3.diadia.FormatoFileNonValidoException;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.Cane;
 import it.uniroma3.diadia.personaggi.Mago;
 import it.uniroma3.diadia.personaggi.Strega;
+
+import java.io.IOException;
 
 /**
  * Questa classe modella il labirinto all'interno del quale il giocatore dovrà muoversi.
